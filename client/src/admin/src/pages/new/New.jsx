@@ -3,7 +3,7 @@ import Sidebar from "../../components/sidebar/Sidebar";
 import Nevbar from "../../components/nevbar/Nevbar";
 import DriveFolderUploadOutlinedIcon from "@mui/icons-material/DriveFolderUploadOutlined";
 import { matchRoutes, useLocation } from "react-router-dom"
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import axios from "../../api/axios";
 import React from "react";
 
@@ -14,15 +14,71 @@ const New = ({ inputs, productRows }) => {
   const location = useLocation();
   const locationArr = location.pathname.split("/");
   const id = locationArr[locationArr.length -1];
+  const [product, setProduct] = useState([]);
+  const imageUpload = null;
   
-  const product = productRows.find(product=>product._id == id);
+  // const product = productRows.find(product=>product._id == id);
 
-  console.log(product);
+
+  // console.log(product);
   // document.getElementById('userInput').value
+
+
+
+  useEffect(() => {
+    setProduct( productRows.find(product=>product._id == id));
+  }, [])
+
+
+// console.log(product);
+
+
+
+
+
   const updateObject = ()=>{
+    const color = product.color;
+    const manufacturer = product.manufacturer;
+    const price = product.price;
+    const kilometers = product.kilometers;
+    const year = product.year;
+    const image = product.image;
+
+
+
+
+
     if (document.getElementsByClassName("userInput-color")[0].value != ""){
       console.log(document.getElementsByClassName("userInput-color")[0].value);
+      color = document.getElementsByClassName("userInput-color")[0].value;
     }
+    
+    if (document.getElementsByClassName("userInput-manufacturer")[0].value != ""){
+      console.log(document.getElementsByClassName("userInput-manufacturer")[0].value);
+      manufacturer = document.getElementsByClassName("userInput-manufacturer")[0].value;
+    }
+
+    
+    if (document.getElementsByClassName("userInput-price")[0].value != ""){
+      console.log(document.getElementsByClassName("userInput-price")[0].value);
+      price = document.getElementsByClassName("userInput-price")[0].value;
+    }
+    
+    if (document.getElementsByClassName("userInput-kilometers")[0].value != ""){
+      console.log(document.getElementsByClassName("userInput-kilometers")[0].value);
+      kilometers = document.getElementsByClassName("userInput-kilometers")[0].value;
+    }
+    
+    if (document.getElementsByClassName("userInput-year")[0].value != ""){
+      console.log(document.getElementsByClassName("userInput-year")[0].value);
+      year = document.getElementsByClassName("userInput-year")[0].value;
+    }
+    
+    if (imageUpload != null){
+      console.log(imageUpload);
+      image = imageUpload;
+    }
+    
   }
 
   return (
@@ -43,7 +99,9 @@ const New = ({ inputs, productRows }) => {
                 <label htmlFor="file">
                   Image: <DriveFolderUploadOutlinedIcon className="icon" />
                 </label>
-                <input type="file" id="file" onChange={(e) => setFile(e.target.files[0])} style={{ display: "none" }} />
+                <input type="file" id="file" onChange={(e) => setFile(e.target.files[0])  } style={{ display: "none" }} />
+                {/* <input type="file" id="file" onChange={(e) => imageUpload = e.target.files[0]} style={{ display: "none" }} /> */}
+
               </div>
 
               {/* {inputs.map((input) => (
