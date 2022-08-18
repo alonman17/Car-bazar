@@ -14,6 +14,7 @@ import { Toaster } from "react-hot-toast";
 import UserSettings from "./Pages/UserSettings";
 import Checkout from "./Pages/Checkout";
 import OrderHistory from "./Pages/OrderHistory";
+import Students from './Pages/Students'
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Layout />}>
             {/* public routes */}
+            <Route path="/students" element={<Students />} />
             <Route path="/Cars" element={<Products />} />
             <Route path="/Home" element={<Home />} />
             <Route path="/login" element={<Login />} />
